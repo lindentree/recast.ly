@@ -1,5 +1,5 @@
 var searchYouTube = (options, callback) => {
-  // TODO
+  return;
 };
 
 export default searchYouTube;

@@ -1,12 +1,12 @@
-var VideoList = () => (
-  <div className="video-list">
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-  </div>
-);
+import exampleVideoData from '/src/data/exampleVideoData.js';
+import VideoListEntry from './VideoListEntry.js';
+
+var VideoList = (props) => {
+  var convertedList = _.map(props.videos, function(video, i) {
+    return <VideoListEntry url = {video.snippet.thumbnails.default} title = {video.snippet.title} description = {video.snippet.description} key = {i}/>;
+  });
+  return <div className="video-list">{convertedList}</div>;
+};
 
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated
