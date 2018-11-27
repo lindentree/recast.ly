@@ -2,7 +2,7 @@ import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
 import Search from './Search.js';
 import exampleVideoData from '/src/data/exampleVideoData.js';
-import searchYoutube from '/src/lib/searchYoutube.js';
+import searchYouTube from '/src/lib/searchYoutube.js';
 import YOUTUBE_API_KEY from '/src/config/youtube.js';
 
 // var App = () => (
@@ -32,12 +32,20 @@ class App extends React.Component {
     };
     this.onVideoListEntryClick = this.onVideoListEntryClick.bind(this);
   }
+
+  componentDidMount() {
+    searchYouTube({key: {YOUTUBE_API_KEY},
+      max: '5',
+      query: 'HackReactor'}, this.setState({currentVideoList: data}));
+    currentVideo = currentVideoList[0];  
+  }
   
   onVideoListEntryClick(clickedVideo) {
     this.setState({
       currentVideo: clickedVideo
     });
   }
+
   
   render() {
     return (<div>
