@@ -36,8 +36,7 @@ class App extends React.Component {
   componentDidMount() {
     searchYouTube({key: {YOUTUBE_API_KEY},
       max: '5',
-      query: 'HackReactor'}, this.setState({currentVideoList: data}));
-    currentVideo = currentVideoList[0];  
+      query: 'HackReactor'}, function(data) {this.setState({currentVideoList: data});});
   }
   
   onVideoListEntryClick(clickedVideo) {
