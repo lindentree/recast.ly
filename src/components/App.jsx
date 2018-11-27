@@ -23,7 +23,8 @@ import YOUTUBE_API_KEY from '/src/config/youtube.js';
 //   </div>
 // );
 
-class App extends React.Component {
+class App extends React.Component {  
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -32,13 +33,17 @@ class App extends React.Component {
     };
     this.onVideoListEntryClick = this.onVideoListEntryClick.bind(this);
   }
-
-  componentDidMount() {
-    searchYouTube({key: {YOUTUBE_API_KEY},
-      max: '5',
-      query: 'HackReactor'}, function(data) {this.setState({currentVideoList: data});});
-  }
   
+  componentDidMount() {
+    var searchYouTubeDebounced = _.debounce(searchYouTube, 500);
+    searchYouTubeDebounced({key: `${YOUTUBE_API_KEY}`,
+      max: '5',
+      query: 'surfing'}, (data) => {
+      this.setState({currentVideoList: data},
+        () => { this.setState({currentVideo: this.state.currentVideoList[0]}); });
+    });
+  }
+
   onVideoListEntryClick(clickedVideo) {
     this.setState({
       currentVideo: clickedVideo
