@@ -40,7 +40,8 @@ class App extends React.Component {
       currentVideo: exampleVideoData[0]
     };
     this.onVideoListEntryClick = this.onVideoListEntryClick.bind(this);
-    this.onSearchChangeDebounced = _.debounce(this.onSearchChange, 1500);
+    this.onSearchChange = this.onSearchChange.bind(this);
+    this.delayedQuery = _.debounce(this.youTubeQuery, 1500);
   }
   
 
@@ -52,11 +53,21 @@ class App extends React.Component {
   
   onSearchChange(event) {
     event.persist();
+    this.delayedQuery(event);
+   
+  }
+
+  youTubeQuery (event) {
+
+    const storage = event.target.value;
+
     searchYouTube({key: `${YOUTUBE_API_KEY}`,
       max: '5',
-      query: `${event.target.value}`}, (data) => {
+      query: `${storage}`}, (data) => {
       this.setState({currentVideoList: data, currentVideo: data[0]});
     });
+
+
   }
 
   
@@ -64,7 +75,7 @@ class App extends React.Component {
     return (<div>
       <nav className="navbar">
         <div className="col-md-6 offset-md-3">
-          <div><h5><em>search</em><Search searchFunc={this.onSearchChangeDebounced}/></h5></div>
+          <div><h5><em>search</em><Search searchFunc={this.onSearchChange}/></h5></div>
         </div>
       </nav>
       <div className="row">
