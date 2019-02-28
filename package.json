@@ -11,8 +11,9 @@
   },
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.2",
-    "jquery": "^2.2.1",
+    "jquery": ">=3.0.0",
     "lodash": "^4.6.1",
+    "popper": "^1.0.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7"
   },
@@ -21,7 +22,7 @@
     "babel-plugin-react": "1.0.0",
     "babel-preset-react": "^6.5.0",
     "chai": "^3.5.0",
-    "mocha": "2.3.3",
-    "sinon": "1.17.3"
+    "mocha": "6.0.2",
+    "sinon": "7.2.5"
   }
 }
